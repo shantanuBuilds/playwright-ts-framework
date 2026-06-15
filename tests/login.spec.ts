@@ -28,5 +28,9 @@ test('Login Test', async ({ page })=>
     await productsPage.openCart();
 
     await cartPage.verifyBackpackInCart();
+
+    await cartPage.removeProduct();
+
+    await cartPage.verifyProductRemoved();
     
 });
