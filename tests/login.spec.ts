@@ -4,6 +4,8 @@ import { loginData } from '../test-data/loginData';
 import { environment } from '../config/environment';
 import { ProductsPage } from '../pages/ProductsPage';
 import { CartPage } from '../pages/CartPage';
+import { CheckoutPage } from '../pages/CheckoutPage';
+import { checkoutData } from '../test-data/checkoutData';
 
 test('Login Test', async ({ page })=>
 {
@@ -20,6 +22,7 @@ test('Login Test', async ({ page })=>
 
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
+    const checkoutPage = new CheckoutPage(page);
 
     await productsPage.verifyProductsPage();
 
@@ -29,8 +32,23 @@ test('Login Test', async ({ page })=>
 
     await cartPage.verifyBackpackInCart();
 
-    await cartPage.removeProduct();
+    //await cartPage.removeProduct();
 
-    await cartPage.verifyProductRemoved();
-    
+    //await cartPage.verifyProductRemoved();
+
+    await cartPage.verifyProductDescription();
+
+    await cartPage.verifyProductPrice();
+
+    await cartPage.verifycontinueShoppingButton();
+
+    await cartPage.clickCheckoutButton();
+
+    await checkoutPage.verifyPageTtile();
+
+    await checkoutPage.fillUserInformation(
+        checkoutData.firstName,
+        checkoutData.lastName,
+        checkoutData.postalCode
+    );
 });
