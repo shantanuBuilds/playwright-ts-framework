@@ -9,6 +9,8 @@ export class CheckoutPage{
     readonly lastNameInput: Locator;
     readonly zipCodeInput: Locator;
 
+    readonly continueButton: Locator;
+
     constructor(page: Page){
 
         this.page = page;
@@ -17,9 +19,12 @@ export class CheckoutPage{
         this.firstNameInput = page.locator("#first-name");
         this.lastNameInput = page.locator("#last-name");
         this.zipCodeInput = page.locator("#postal-code");
+
+        this.continueButton = page.locator("#continue");
+        
     }
 
-    async verifyPageTtile(){
+    async verifyPageTitle(){
 
         await expect(this.pageTitle).toBeVisible();
     }
@@ -30,5 +35,10 @@ export class CheckoutPage{
         await this.lastNameInput.fill(lastName);
         await this.zipCodeInput.fill(postalCode);
     }
+
+    async clickContinue(){
+    
+        await this.continueButton.click();
+}
     
 }

@@ -6,6 +6,8 @@ import { ProductsPage } from '../pages/ProductsPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { checkoutData } from '../test-data/checkoutData';
+import { OverviewPage } from '../pages/OverviewPage';
+import { CompletePage } from '../pages/CompletePage';
 
 test('Login Test', async ({ page })=>
 {
@@ -23,6 +25,8 @@ test('Login Test', async ({ page })=>
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutPage = new CheckoutPage(page);
+    const overviewPage = new OverviewPage(page);
+    const completePage = new CompletePage(page);
 
     await productsPage.verifyProductsPage();
 
@@ -44,11 +48,27 @@ test('Login Test', async ({ page })=>
 
     await cartPage.clickCheckoutButton();
 
-    await checkoutPage.verifyPageTtile();
+    await checkoutPage.verifyPageTitle();
 
     await checkoutPage.fillUserInformation(
         checkoutData.firstName,
         checkoutData.lastName,
         checkoutData.postalCode
     );
+
+    await checkoutPage.clickContinue();
+
+    await overviewPage.verifyOverviewPage();
+
+    await overviewPage.verifyPaymentInformation();
+
+    await overviewPage.verifyShippingInformation();
+
+    await overviewPage.verifyTotalPrice();
+
+    await overviewPage.clickFinish();
+
+    await completePage.verifyPageTitle();
+
+    await completePage.verifyOrderSuccessMessage();
 });
