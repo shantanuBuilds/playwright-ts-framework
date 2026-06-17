@@ -1,4 +1,5 @@
-import {test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from '../fixtures/pagesFixture';
 import { LoginPage } from '../pages/LoginPage';
 import { loginData } from '../test-data/loginData';
 import { environment } from '../config/environment';
@@ -9,7 +10,7 @@ import { checkoutData } from '../test-data/checkoutData';
 import { OverviewPage } from '../pages/OverviewPage';
 import { CompletePage } from '../pages/CompletePage';
 
-test('Login Test', async ({ page })=>
+test.beforeEach(async ({ page })=> //beforeEach will not a 'test name' because this is a hook not a test
 {
     const loginPage = new LoginPage(page);
 
@@ -19,6 +20,10 @@ test('Login Test', async ({ page })=>
         loginData.username,
         loginData.password
     );
+});
+
+test('Complete Purchase Flow', async ({ page })=> {
+    // Business flow starts here
 
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
@@ -71,4 +76,23 @@ test('Login Test', async ({ page })=>
     await completePage.verifyPageTitle();
 
     await completePage.verifyOrderSuccessMessage();
+});
+
+test ('Add product To Cart', async({ page })=> {
+
+    const productsPage = new ProductsPage(page);
+    const cartPage = new CartPage(page);
+
+    await productsPage.verifyProductsPage();
+
+    await productsPage.addToCart();
+
+    await productsPage.openCart();
+
+    await cartPage.verifyBackpackInCart();
+});
+
+test('Fixture Test', async ({ productsPage }) => {
+
+    await productsPage.verifyProductsPage();
 });
