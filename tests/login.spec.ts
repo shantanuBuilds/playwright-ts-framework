@@ -22,16 +22,17 @@ test.beforeEach(async ({ page })=> //beforeEach will not a 'test name' because t
     );
 });
 
-test('Complete Purchase Flow', async ({ page })=> {
+test('Complete Purchase Flow', async ({ page, productsPage, cartPage, checkoutPage, 
+    overviewPage, completePage })=> {
     // Business flow starts here
 
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
-    const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
-    const overviewPage = new OverviewPage(page);
-    const completePage = new CompletePage(page);
+    //const productsPage = new ProductsPage(page);
+    //const cartPage = new CartPage(page);
+    //const checkoutPage = new CheckoutPage(page);
+    //const overviewPage = new OverviewPage(page);
+    //const completePage = new CompletePage(page);
 
     await productsPage.verifyProductsPage();
 
@@ -78,10 +79,7 @@ test('Complete Purchase Flow', async ({ page })=> {
     await completePage.verifyOrderSuccessMessage();
 });
 
-test ('Add product To Cart', async({ page })=> {
-
-    const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
+test ('Add product To Cart', async({ productsPage, cartPage })=> {
 
     await productsPage.verifyProductsPage();
 
