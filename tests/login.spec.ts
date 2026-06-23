@@ -21,7 +21,3 @@ test.beforeEach(async ({ page })=> //beforeEach will not a 'test name' because t
 });
 
 
-/*test('Fixture Test', async ({ productsPage }) => {
-
-    await productsPage.verifyProductsPage();
-});*/
