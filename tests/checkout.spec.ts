@@ -8,7 +8,7 @@ import { checkoutData } from '../test-data/checkoutData';
 
 for (const user of loginData){
 
-    test(`Cart Purchase Flow - ${user.username}`,async ({ page, productsPage, cartPage, checkoutPage, 
+    test(`@smoke Cart Purchase Flow - ${user.username}`,async ({ page, productsPage, cartPage, checkoutPage, 
     overviewPage, completePage  })=>{
 
         const loginPage = new LoginPage(page); 

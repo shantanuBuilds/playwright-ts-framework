@@ -7,7 +7,7 @@ import { expect } from "@playwright/test";
 
 for(const user of loginData){
 
-    test(`Add product to cart - ${user.username}`, async ({ page, productsPage, cartPage })=> {
+    test(`@smoke Add product to cart - ${user.username}`, async ({ page, productsPage, cartPage })=> {
 
     const loginPage = new LoginPage(page);
 
