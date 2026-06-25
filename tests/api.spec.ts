@@ -1,4 +1,25 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, request } from '@playwright/test';
+
+test('Create New Post API Test', async({ request}) => {
+
+    const response = await request.post('https://jsonplaceholder.typicode.com/posts',
+    {
+        data: 
+        {
+            title: 'Playwright API Testing',
+            body: 'First POST request using Playwright'
+        }
+    }
+);
+
+    expect(response.status()).toBe(201);
+
+    const responseBody = await response.json();
+
+    console.log(responseBody);
+
+});
+
 
 test('Get Post API Test', async ({ request }) => {
 
@@ -7,7 +28,9 @@ test('Get Post API Test', async ({ request }) => {
     
     //This converts the response into JSON
     const responseBody = await response.json();
-    
+
+    expect(response.status()).toBe(200);
+
     console.log(responseBody.id);
     console.log(responseBody.title);
 
