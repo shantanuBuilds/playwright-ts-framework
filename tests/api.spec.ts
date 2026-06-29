@@ -35,3 +35,26 @@ test('Get Post API Test', async ({ request }) => {
     console.log(responseBody.title);
 
 });
+
+
+test.only('Update Post API Test', async ({ request}) => {
+
+    const response = await request.put('https://jsonplaceholder.typicode.com/posts/1',
+        {
+            data: {
+                id: 1,
+                title: 'Updated Playwright API Testing',
+                body: 'Learning PUT Request',
+                userId: 1
+            }
+        }
+
+    );
+
+    expect(response.status()).toBe(200);
+    
+    console.log("Status code:", response.status());
+    const responseBody = await response.json();
+
+    console.log(responseBody);
+});
