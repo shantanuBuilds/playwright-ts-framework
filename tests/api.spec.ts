@@ -37,7 +37,7 @@ test('Get Post API Test', async ({ request }) => {
 });
 
 
-test.only('Update Post API Test', async ({ request}) => {
+test('Update Post API Test', async ({ request}) => {
 
     const response = await request.put('https://jsonplaceholder.typicode.com/posts/1',
         {
@@ -54,7 +54,19 @@ test.only('Update Post API Test', async ({ request}) => {
     expect(response.status()).toBe(200);
     
     console.log("Status code:", response.status());
+
     const responseBody = await response.json();
 
     console.log(responseBody);
+});
+
+
+test.only('Delete Post API Test', async ({ request}) =>{
+
+    const response = await request.delete('https://jsonplaceholder.typicode.com/posts/1');
+
+    console.log("Status code:", response.status());
+
+    expect(response.status()).toBe(200);
+
 });
