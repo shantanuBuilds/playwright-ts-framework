@@ -72,7 +72,7 @@ test('Delete Post API Test', async ({ request}) =>{
 });
 
 //Path Parameter
-test.only('Get User By ID', async({ request })=> {
+test('Get User By ID', async({ request })=> {
 
     const response = await request.get('https://jsonplaceholder.typicode.com/users/1');
 
@@ -85,7 +85,7 @@ test.only('Get User By ID', async({ request })=> {
 });
 
 //Query Parameter
-test.only('Get User By Query Parameter', async({ request }) => {
+test('Get User By Query Parameter', async({ request }) => {
 
     const response = await request.get('https://jsonplaceholder.typicode.com/users?id=1');
 
