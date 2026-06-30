@@ -60,8 +60,8 @@ test('Update Post API Test', async ({ request}) => {
     console.log(responseBody);
 });
 
-
-test.only('Delete Post API Test', async ({ request}) =>{
+//Delete
+test('Delete Post API Test', async ({ request}) =>{
 
     const response = await request.delete('https://jsonplaceholder.typicode.com/posts/1');
 
@@ -69,4 +69,31 @@ test.only('Delete Post API Test', async ({ request}) =>{
 
     expect(response.status()).toBe(200);
 
+});
+
+//Path Parameter
+test.only('Get User By ID', async({ request })=> {
+
+    const response = await request.get('https://jsonplaceholder.typicode.com/users/1');
+
+    expect(response.status()).toBe(200);
+
+    const responseBody = await response.json();
+
+    console.log(responseBody.name);
+
+});
+
+//Query Parameter
+test.only('Get User By Query Parameter', async({ request }) => {
+
+    const response = await request.get('https://jsonplaceholder.typicode.com/users?id=1');
+
+    expect(response.status()).toBe(200);
+
+    console.log('Status code:', response.status());
+
+    const responseBody = await response.json();
+
+    console.log(responseBody[0].name);
 });
