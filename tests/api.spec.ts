@@ -1,4 +1,5 @@
 import { test, expect, request } from '@playwright/test';
+import { TokenManager } from '../utils/TokenManager';
 
 test('Create New Post API Test', async({ request}) => {
 
@@ -96,4 +97,34 @@ test('Get User By Query Parameter', async({ request }) => {
     const responseBody = await response.json();
 
     console.log(responseBody[0].name);
+});
+
+
+//Login API
+test('Login API - DummyJSON', async({ request }) => {
+
+    const response = await request.post('https://dummyjson.com/auth/login',
+        {
+            data: {
+                username: 'emilys',
+                password: 'emilyspass'
+            }
+        }
+    );
+
+        expect(response.status()).toBe(200);
+
+        const responseBody = await response.json();
+
+        console.log("Status Code:", response.status());
+        console.log("Access Token:", responseBody.accessToken);
+        console.log(responseBody);
+});
+
+//
+test.only('Get Token Using Utility', async({ request }) => {
+
+        const token = await TokenManager.getToken(request);
+
+        console.log(token);
 });
