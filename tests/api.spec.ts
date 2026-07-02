@@ -122,7 +122,7 @@ test('Login API - DummyJSON', async({ request }) => {
 });
 
 //
-test.only('Get Token Using Utility', async({ request }) => {
+test('Get Token Using Utility', async({ request }) => {
 
         const token = await TokenManager.getToken(request);
 
